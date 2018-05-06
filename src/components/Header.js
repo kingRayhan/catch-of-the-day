@@ -1,4 +1,4 @@
-import React , { Component } from 'react';
+import React from 'react';
 const Header = ({ tagline }) => (
     <React.Fragment>
         <header className="top">

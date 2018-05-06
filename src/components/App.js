@@ -45,6 +45,25 @@ class App extends Component{
         // 3. update state
         this.setState({ fishes });        
     }
+
+    updateFish = (key , UpdatedFish) => {
+        const fishes = { ...this.state.fishes };
+        fishes[key] = UpdatedFish;
+        this.setState({ fishes });
+    }
+
+    deleteFish = key => {
+        const fishes = {...this.state.fishes};
+        fishes[key] = null;
+        this.setState({ fishes });
+    }
+
+    deleteOrder = key => {
+        const order = {...this.state.order};
+        delete order[key];
+        this.setState({ order });
+    }
+
     loadSampleFishes = () => {
         this.setState({
             fishes: sampleFishes
@@ -57,6 +76,17 @@ class App extends Component{
         // 2. Either add to the order or update the number of order
         order[key] = order[key] + 1 || 1;
         // 3. update state
+        this.setState({ order }); 
+    }
+    incrementOrder = key => {
+        const order = this.state.order;
+        order[key]++;
+        this.setState({ order }); 
+    }
+    decrementOrder = key => {
+        const order = this.state.order;
+        if(order[key] === 0) return;
+        order[key]--;
         this.setState({ order }); 
     }
     fishes = () => 
@@ -76,9 +106,17 @@ class App extends Component{
                     <Header tagline="freash seafood market"/>
                     <ul className="fishes">{ this.fishes() }</ul>
                 </div>
-                <Order fishes={this.state.fishes} orders={this.state.order} />
+                <Order 
+                    fishes={this.state.fishes} 
+                    orders={this.state.order} 
+                    incrementOrder={this.incrementOrder}
+                    decrementOrder={this.decrementOrder}
+                    deleteOrder={this.deleteOrder}/>
                 <Inventory 
                     addFish={this.addFish} 
+                    updateFish={this.updateFish} 
+                    fishes={this.state.fishes}
+                    deleteFish={this.deleteFish}
                     loadSampleFishes={this.loadSampleFishes}/>
             </div>
         )

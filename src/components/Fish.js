@@ -3,7 +3,13 @@ import { formatPrice } from '../helpers'
 class Fish extends Component{
 
 	render = () => {
-		const { image , name , price , status , desc } = this.props.details;
+		const { // props
+			image, 
+			name, 
+			price, 
+			status, 
+			desc 
+		} = this.props.details;
 		const isAvailable = status === 'available'
 		return(
 			<li className="menu-fish">

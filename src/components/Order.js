@@ -13,6 +13,9 @@ class Order extends Component{
 		return <li key={key}>
 			{ count } lbs { fish.name }
 			{ formatPrice(count * fish.price) }
+            <button onClick={ () => this.props.decrementOrder(key) }> { '<' } </button>
+            <button onClick={ () => this.props.incrementOrder(key) }> { '>' } </button>
+            <button onClick={ () => this.props.deleteOrder(key) }>&times;</button>
 		</li>;
 	}
 
@@ -36,8 +39,7 @@ class Order extends Component{
             		{ orderIds.map(this.renderOrder) }
             	</ul>
             	<div className="total">
-            		Total: &nbsp;
-            			<strong>{ formatPrice(total) }</strong>
+            		Total: &nbsp; <strong>{ formatPrice(total) }</strong>
             	</div>
             </div>
         )
